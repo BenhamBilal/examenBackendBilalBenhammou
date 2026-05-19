@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class FaqCategory extends Model
 {
-    protected $fillable = ['name'];
 
-    public function items()
-    {
-        return $this->hasMany(FaqItem::class, 'faq_category_id');
+    use HasFactory;
+
+    protected $fillable = [
+        'name'
+    ];
+
+    public function items(){
+        return $this->hasMany(FaqItem::class,'faq_category_id');
     }
+    //
 }
