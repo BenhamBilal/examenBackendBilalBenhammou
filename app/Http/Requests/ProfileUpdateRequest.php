@@ -23,15 +23,16 @@ class ProfileUpdateRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
+                Rule::unique(User::class)->ignore($this->user()->id)
+            ],
             'username' => [
                 'nullable',
                 'string',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id)],
+                Rule::unique(User::class)->ignore($this->user()->id)
+            ],
             'birthday' => ['nullable', 'date', 'before:today'],
             'about_me' => ['nullable','string', 'max:1000']
-            ],
         ];
     }
 }
