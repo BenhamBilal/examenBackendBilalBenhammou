@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Userzone;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,13 @@ class ProfileController extends Controller
     {
         return view('userzone.profile.edit', [
             'user' => $request->user(),
+        ]);
+    }
+
+    public function show(User $user) : View
+    {
+        return view('userzone.profile.show',[
+            'user' => $user,
         ]);
     }
 
@@ -63,4 +71,6 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
 }
