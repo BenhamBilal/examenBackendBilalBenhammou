@@ -12,6 +12,7 @@ Route::get('/recepten', [RecipeController::class, 'index'])->name('recipes.index
 Route::get('/recepten/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 Route::get('/profiel/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
+
 // 🔐 gebruikers
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn () => view('userzone.dashboard'))->middleware('verified')->name('dashboard');
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 // 🔐🛡️ Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
