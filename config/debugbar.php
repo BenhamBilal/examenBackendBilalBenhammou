@@ -212,7 +212,7 @@ return [
             'precision' => (int) env('DEBUGBAR_OPTIONS_MEMORY_PRECISION', 0),       // Memory rounding precision
         ],
         'auth' => [
-            'show_name' => env('DEBUGBAR_OPTIONS_AUTH_SHOW_NAME', true),     // Also show the users name/email in the debugbar
+            'show_name' => env('DEBUGBAR_OPTIONS_AUTH_SHOW_NAME', true),     // Also show the admin name/email in the debugbar
             'show_guards' => env('DEBUGBAR_OPTIONS_AUTH_SHOW_GUARDS', true), // Show the guards that are used
         ],
         'gate' => [
