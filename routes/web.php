@@ -1,22 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\Userzone\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 
-Route::get('/', [\App\Http\Controllers\WelcomeController::class,'index']) ->name('welcome');
+// 🔓 Publiek
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/recepten', [RecipeController::class, 'index'])->name('recipes.index');
+Route::get('/recepten/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
+Route::get('/profiel/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
-Route::get('/dashboard', function () {
-    return view('userzone.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/profiel/{user}', [App\Http\Controllers\Userzone\ProfileController::class,'show'])->name('profile.show');
-
+// 🔐 gebruikers
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', fn () => view('userzone.dashboard'))->middleware('verified')->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function (){
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+// 🔐🛡️ Admin
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('users', UserController::class);
 });
+
 require __DIR__.'/auth.php';
