@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Userzone\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
 // 🔐🛡️ Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('recipes', AdminRecipeController::class);
 });
+
 
 require __DIR__.'/auth.php';
