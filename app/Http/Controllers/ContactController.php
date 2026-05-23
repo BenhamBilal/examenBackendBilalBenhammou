@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -21,6 +23,8 @@ class ContactController extends Controller
         ]);
 
         ContactMessage::create($validated);
+
+        Mail::to('admin@ehb.be')->send(new ContactMail($validated));
 
         return redirect()->route('contact.index')->with('status','Bericht verzonden!');
     }
