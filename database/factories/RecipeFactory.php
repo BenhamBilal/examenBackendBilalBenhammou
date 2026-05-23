@@ -19,7 +19,7 @@ class RecipeFactory extends Factory
     {
         return [
             'title' => fake()->sentence(3),
-            'image_path' => 'recipe/' . fake()->uuid() . '.jpg',
+            'image_path' => null,
             'content' => fake()->paragraph(3,true),
             'ingredients' => implode("\n",fake()->sentences(5)),
             'cooking_time' => fake()->numberBetween(10,180),

@@ -32,7 +32,7 @@
                 <x-breeze.dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()?->name ?? 'Gast' }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -46,6 +46,21 @@
                         <x-breeze.dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-breeze.dropdown-link>
+
+                        @if(Auth::user()?->isAdmin())
+                            <x-breeze.dropdown-link :href="route('admin.users.index')">
+                                {{ __('Gebruikersbeheer') }}
+                            </x-breeze.dropdown-link>
+                            <x-breeze.dropdown-link :href="route('admin.recipes.index')">
+                                {{ __('Recepten beheer') }}
+                            </x-breeze.dropdown-link>
+                            <x-breeze.dropdown-link :href="route('admin.faq-categories.index')">
+                                {{ __('FAQ beheer') }}
+                            </x-breeze.dropdown-link>
+                            <x-breeze.dropdown-link :href="route('admin.contact-messages.index')">
+                                {{ __('Contactberichten') }}
+                            </x-breeze.dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -80,15 +95,15 @@
             <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-breeze.responsive-nav-link>
-            <x-breeze.nav-link :href="route('recipes.index')" :active="request()->routeIs('recipes.*')">
+            <x-breeze.responsive-nav-link :href="route('recipes.index')" :active="request()->routeIs('recipes.*')">
                 {{ __('Recepten') }}
-            </x-breeze.nav-link>
-            <x-breeze.nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+            </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
                 {{ __('FAQ') }}
-            </x-breeze.nav-link>
-            <x-breeze.nav-link :href="route('contact.index')" :active="request()->routeIs('contact.*')">
+            </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('contact.index')" :active="request()->routeIs('contact.*')">
                 {{ __('Contact') }}
-            </x-breeze.nav-link>
+            </x-breeze.responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -11,6 +11,8 @@
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         @if ($recipe->image_path)
                             <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->title }}" class="w-full h-48 object-cover">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="{{ $recipe->title }}" class="w-full h-48 object-cover">
                         @endif
                         <div class="p-6">
                             <h3 class="text-lg font-semibold">{{ $recipe->title }}</h3>

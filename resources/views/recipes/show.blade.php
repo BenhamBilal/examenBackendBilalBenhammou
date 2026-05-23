@@ -10,6 +10,8 @@
                 <div class="p-6">
                     @if ($recipe->image_path)
                         <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->title }}" class="w-full h-64 object-cover rounded mb-6">
+                    @else
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&h=600&fit=crop" alt="{{ $recipe->title }}" class="w-full h-64 object-cover rounded mb-6">
                     @endif
                     <div class="flex gap-4 text-sm text-gray-500 mb-4">
                         <span>Door {{ $recipe->author->name ?? 'Onbekend' }}</span>
