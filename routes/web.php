@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('recipes', AdminRecipeController::class);
+    Route::resource('faq-categories', \App\Http\Controllers\Admin\FaqCategoryController::class);
 });
 
 
