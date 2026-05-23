@@ -15,6 +15,15 @@
                     <x-breeze.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-breeze.nav-link>
+                    <x-breeze.nav-link :href="route('recipes.index')" :active="request()->routeIs('recipes.*')">
+                        {{ __('Recepten') }}
+                    </x-breeze.nav-link>
+                    <x-breeze.nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                        {{ __('FAQ') }}
+                    </x-breeze.nav-link>
+                    <x-breeze.nav-link :href="route('contact.index')" :active="request()->routeIs('contact.*')">
+                        {{ __('Contact') }}
+                    </x-breeze.nav-link>
                 </div>
             </div>
 
@@ -71,6 +80,15 @@
             <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-breeze.responsive-nav-link>
+            <x-breeze.nav-link :href="route('recipes.index')" :active="request()->routeIs('recipes.*')">
+                {{ __('Recepten') }}
+            </x-breeze.nav-link>
+            <x-breeze.nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                {{ __('FAQ') }}
+            </x-breeze.nav-link>
+            <x-breeze.nav-link :href="route('contact.index')" :active="request()->routeIs('contact.*')">
+                {{ __('Contact') }}
+            </x-breeze.nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

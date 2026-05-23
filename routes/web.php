@@ -31,6 +31,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('recipes', AdminRecipeController::class);
     Route::resource('faq-categories', \App\Http\Controllers\Admin\FaqCategoryController::class);
     Route::resource('faq-items', \App\Http\Controllers\Admin\FaqItemController::class);
+    Route::resource('contact-messages', \App\Http\Controllers\Admin\ContactMessageController::class)->only(['index','show','destroy']);
 });
 
 
