@@ -99,7 +99,7 @@ Een dynamische receptenwebsite gebouwd met Laravel 13 voor het vak Backend Web. 
 
 ## Screenshots
 
-![Alt-tekst van de afbeelding]()
+![Welcome](public/images/screenshots/welcomepagina.png)
 
 - Welcome pagina
 - Recepten overzicht
