@@ -1,5 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
+        @guest
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded">
+                    <p>Je moet eerst <a href="{{ route('login') }}" class="font-semibold underline">inloggen</a> om recepten te kunnen bekijken.</p>
+                </div>
+            </div>
+        @endguest
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Alle recepten') }}
         </h2>

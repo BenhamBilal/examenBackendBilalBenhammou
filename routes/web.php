@@ -12,12 +12,12 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/faq',[\App\Http\Controllers\FaqController::class,'index'])->name('faq.index');
 Route::get('/recepten', [RecipeController::class, 'index'])->name('recipes.index');
 Route::post('/contact',[\App\Http\Controllers\ContactController::class,'store'])->name('contact.store');
-Route::get('/recepten/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 Route::get('/profiel/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/contact', [\App\Http\Controllers\ContactController::class,'index'])->name('contact.index');
 
 // 🔐 gebruikers
 Route::middleware('auth')->group(function () {
+    Route::get('/recepten/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
     Route::get('/dashboard', fn () => view('userzone.dashboard'))->middleware('verified')->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
