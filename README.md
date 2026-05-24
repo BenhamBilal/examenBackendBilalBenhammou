@@ -121,4 +121,13 @@ Een dynamische receptenwebsite gebouwd met Laravel 13 voor het vak Backend Web. 
 - Alpine.js (interactieve componenten)
 - Unsplash (placeholder afbeeldingen)
 - Laravel Boost (AI-assisted development)
-- AI chatlog: [link naar chatlog]
+
+## Ai gebruikt voor : 
+
+- stijl, html  van views
+- email beheer
+- readme schrijven
+- free use afbeeldingen van internet te genereren
+- bugs debuggeren
+- welcomepagina stijl
+
