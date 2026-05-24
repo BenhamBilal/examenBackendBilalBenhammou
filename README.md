@@ -1,89 +1,118 @@
-<p align="center" style="font-size: 24px; margin-bottom: -25px; color: #EF3B2D;">
-    <strong>Educational<br/> Starter Pack<br/></strong><span style="color:gray">for</span>
-</p>
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ReceptenHub - Backend Web Eindopdracht
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Een dynamische receptenwebsite gebouwd met Laravel 13 voor het vak Backend Web. Gebruikers kunnen recepten bekijken, FAQ raadplegen, contact opnemen en hun eigen profiel beheren. Admins hebben volledige controle over gebruikers, recepten, FAQ en contactberichten.
 
+## Functionaliteiten
 
----
+### Authenticatie
+- Registreren, inloggen, uitloggen
+- Wachtwoord resetten bij vergeten wachtwoord
+- "Remember me" functionaliteit
+- Twee rollen: gebruiker en admin
 
-## About this Starter Pack
-<div style="background-color: #f6f8fa; padding: 10px; border-radius: 5px;">
-This is a starter pack for <strong>Laravel tailored for educational purposes</strong>. 
+### Profielpagina
+- Publiek profiel zichtbaar voor iedereen (`/profiel/{user}`)
+- Ingelogde gebruiker kan eigen profiel bewerken
+- Profielvelden: username, verjaardag, profielfoto, over-mij tekst
 
-It is aimed at helping students and beginners to quickly set up a Laravel development environment that allows for 
-learning the basics without the need to configure everything from scratch.
-</div>
+### Recepten (Nieuwtjes)
+- Publieke receptenlijst met detailpagina
+- Admin kan recepten aanmaken, bewerken en verwijderen
+- Recepten bevatten: titel, afbeelding, ingrediënten, bereiding, kooktijd, publicatiedatum
 
-### Changes from the original Laravel repository
-It provides a pre-configured environment with some opinionated settings and packages for the educational context. 
-Initial customisation was done based on Laravel version 12.x. (12.37.0 on November 9th, 2025).
-Updated to Laravel 13.x (13.7 on May 4th, 2026), including now also Laravel Boost.
+### FAQ
+- Publieke FAQ-pagina met vragen gegroepeerd per categorie
+- Admin kan categorieën en vragen/antwoorden beheren
 
-- Added **barryvdh/laravel-debugbar** for debug info in the browser
-- Altered **.env.example** for local development (SQLite database, debug mode on, cache and session set to file)
-- Added **roave/security-advisories** to prevent installation of packages with known security issues
-- Added **laravel/boost** for AI assisted code generation
-- Used **laravel/breeze** for authentication scaffolding with Blade templates (but moved all of the component views to a `components.breeze` subfolder for better organization)
-- Replaced vite and related front-end dependencies by **CDN includes of Tailwind CSS and Alpine JS** to keep things simple
-- Replaced PHP Unit by **Pest PHP** for testing, kept basic example tests
-- Some other small tweaks in configuration files, routes, controller, and view organisation to better reflect the educational purpose (rigid structure)
+### Contact
+- Contactformulier voor bezoekers
+- Admin ontvangt een email bij elk nieuw bericht
+- Admin dashboard om berichten te bekijken en beheren
 
-Everything that follows below (and the shields in the header) are part of the original Laravel README.md file.
+## Technische vereisten
 
----
-## About Laravel
+### Views
+- **Twee layouts**: `app.blade.php` (ingelogd) en `guest.blade.php` (publiek)
+- **Componenten**: Breeze componenten (`x-breeze.nav-link`, `x-breeze.dropdown`, etc.)
+- **Control structures**: `@if`, `@foreach`, `@auth` in Blade views
+- **XSS protectie**: Alle output via `{{ }}` Blade syntax
+- **CSRF protectie**: `@csrf` op alle formulieren
+- **Client-side validatie**: `required` attributen op formuliervelden
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Routes (`routes/web.php`)
+- Alle routes gebruiken controller methods
+- Routes gebruiken middleware (`auth`, `admin`, `verified`)
+- Routes gegroepeerd per toegangsniveau: publiek, ingelogd, admin
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Controllers
+- **Resource controllers**: `UserController`, `RecipeController`, `FaqCategoryController`, `FaqItemController`, `ContactMessageController`
+- **Regular controllers**: `RecipeController` (publiek), `FaqController`, `ContactController`, `ProfileController`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Models & Relaties
+- `User` hasMany `Recipe` (one-to-many)
+- `FaqCategory` hasMany `FaqItem` (one-to-many)
+- `User` hasMany `Recipe` via `author()` relatie
 
-## Learning Laravel
+### Database
+- SQLite database
+- Migraties voor alle tabellen: users, recipes, faq_categories, faq_items, contact_messages
+- Seeder met default admin en testdata
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Installatiehandleiding
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Repository klonen**
+   ```bash
+   git clone <repository-url>
+   cd examenBackendBilalBenhammou
+   ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+2. **Afhankelijkheden installeren**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Agentic Development
+3. **Omgevingsvariabelen**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+4. **Database opzetten**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-```bash
-composer require laravel/boost --dev
+5. **Storage link** (voor afbeeldingen)
+   ```bash
+   php artisan storage:link
+   ```
 
-php artisan boost:install
-```
+6. **Server starten**
+   ```bash
+   php artisan serve
+   ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+7. **Default admin account**
+   - Email: admin@ehb.be
+   - Wachtwoord: Password!321
 
-## Contributing
+## Screenshots
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+*(Voeg hier screenshots toe van de applicatie)*
 
-## Code of Conduct
+- Welcome pagina
+- Recepten overzicht
+- Admin dashboard
+- FAQ pagina
+- Contactformulier
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Gebruikte bronnen
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Laravel 13 documentatie (https://laravel.com/docs)
+- Laravel Breeze (authenticatie scaffolding)
+- Tailwind CSS (styling)
+- Alpine.js (interactieve componenten)
+- Unsplash (placeholder afbeeldingen)
+- Laravel Boost (AI-assisted development)
+- AI chatlog: [link naar chatlog]
