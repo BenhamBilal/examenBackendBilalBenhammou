@@ -62,7 +62,7 @@ Een dynamische receptenwebsite gebouwd met Laravel 13 voor het vak Backend Web. 
 
 1. **Repository klonen**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/BenhamBilal/examenBackendBilalBenhammou
    cd examenBackendBilalBenhammou
    ```
 
@@ -99,7 +99,7 @@ Een dynamische receptenwebsite gebouwd met Laravel 13 voor het vak Backend Web. 
 
 ## Screenshots
 
-*(Voeg hier screenshots toe van de applicatie)*
+
 
 - Welcome pagina
 - Recepten overzicht
